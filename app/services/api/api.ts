@@ -2,6 +2,18 @@ import { ApisauceInstance, create, ApiResponse } from "apisauce"
 import { getGeneralApiProblem } from "./api-problem"
 import { ApiConfig, DEFAULT_API_CONFIG } from "./api-config"
 import * as Types from "./api.types"
+import { CharacterSnapshot } from "../../models/character"
+
+const convertCharacter = (raw: any): CharacterSnapshot => {
+  return {
+    id: raw.id,
+    name: raw.name,
+    gender: raw.gender,
+    titles: raw.titles,
+    playedBy: raw.playedBy,
+    isAlive: raw.isAlive,
+  }
+}
 
 /**
  * Manages all requests to the API.
@@ -47,9 +59,9 @@ export class Api {
   /**
    * Gets a list of users.
    */
-  async getUsers(): Promise<Types.GetUsersResult> {
+  async getCharacters(): Promise<Types.GetCharactersResult> {
     // make the api call
-    const response: ApiResponse<any> = await this.apisauce.get(`/users`)
+    const response: ApiResponse<any> = await this.apisauce.get(`/characters`)
 
     // the typical ways to die when calling an api
     if (!response.ok) {
@@ -57,18 +69,11 @@ export class Api {
       if (problem) return problem
     }
 
-    const convertUser = raw => {
-      return {
-        id: raw.id,
-        name: raw.name,
-      }
-    }
-
     // transform the data into the format we are expecting
     try {
       const rawUsers = response.data
-      const resultUsers: Types.User[] = rawUsers.map(convertUser)
-      return { kind: "ok", users: resultUsers }
+      const convertedCharacters: CharacterSnapshot[] = rawUsers.map(convertCharacter)
+      return { kind: "ok", characters: convertedCharacters }
     } catch {
       return { kind: "bad-data" }
     }
@@ -78,9 +83,9 @@ export class Api {
    * Gets a single user by ID
    */
 
-  async getUser(id: string): Promise<Types.GetUserResult> {
+  async getCharacter(id: string): Promise<Types.GetCharacterResult> {
     // make the api call
-    const response: ApiResponse<any> = await this.apisauce.get(`/users/${id}`)
+    const response: ApiResponse<any> = await this.apisauce.get(`/characters/${id}`)
 
     // the typical ways to die when calling an api
     if (!response.ok) {
@@ -90,11 +95,8 @@ export class Api {
 
     // transform the data into the format we are expecting
     try {
-      const resultUser: Types.User = {
-        id: response.data.id,
-        name: response.data.name,
-      }
-      return { kind: "ok", user: resultUser }
+      const convertedCharacter: CharacterSnapshot = convertCharacter(response.data)
+      return { kind: "ok", character: convertedCharacter }
     } catch {
       return { kind: "bad-data" }
     }

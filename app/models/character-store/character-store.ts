@@ -9,6 +9,7 @@ export const CharacterStoreModel = types
   .model("CharacterStore")
   .props({
     characters: types.optional(types.array(CharacterModel), []),
+    favorites: types.optional(types.map(CharacterModel), {}),
   })
   .extend(withStatus)
   .views(self => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars

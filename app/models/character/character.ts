@@ -12,7 +12,6 @@ export const CharacterModel = types
     titles: types.optional(types.array(types.string), []),
     playedBy: types.maybe(types.string),
     isAlive: types.optional(types.boolean, true),
-    isFavorite: types.optional(types.boolean, false),
   })
   .views(self => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
   .actions(self => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
