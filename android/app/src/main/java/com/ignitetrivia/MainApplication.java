@@ -1,4 +1,4 @@
-package com.iceandfire;
+package com.ignitetrivia;
 
 import android.app.Application;
 

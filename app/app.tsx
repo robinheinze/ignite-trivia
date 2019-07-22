@@ -74,7 +74,7 @@ export class App extends React.Component<{}, AppState> {
 /**
  * This needs to match what's found in your app_delegate.m and MainActivity.java.
  */
-const APP_NAME = "IceAndFire"
+const APP_NAME = "IgniteTrivia"
 
 // Should we show storybook instead of our app?
 //

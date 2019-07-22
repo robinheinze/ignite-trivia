@@ -1,4 +1,4 @@
-package com.iceandfire;
+package com.ignitetrivia;
 
 import com.facebook.react.ReactActivity;
 
@@ -24,6 +24,6 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "IceAndFire";
+        return "IgniteTrivia";
     }
 }

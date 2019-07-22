@@ -9,7 +9,7 @@ export const QuestionModel = types
     id: types.identifier,
     category: types.maybe(types.string),
     type: types.enumeration(["multiple", "boolean"]),
-    difficulty: types.maybe(types.string),
+    difficulty: types.enumeration(["easy", "medium", "hard"]),
     question: types.maybe(types.string),
     correctAnswer: types.maybe(types.string),
     incorrectAnswers: types.optional(types.array(types.string), []),
