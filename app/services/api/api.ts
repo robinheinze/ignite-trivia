@@ -5,12 +5,14 @@ import * as Types from "./api.types"
 import { CharacterSnapshot } from "../../models/character"
 
 const convertCharacter = (raw: any): CharacterSnapshot => {
+  const url: string = raw.url
+  const id = url.replace("https://anapioficeandfire.com/api/characters/", "")
   return {
-    id: raw.id,
+    id: id,
     name: raw.name,
     gender: raw.gender,
     titles: raw.titles,
-    playedBy: raw.playedBy,
+    playedBy: raw.playedBy[0],
     isAlive: raw.isAlive,
   }
 }
@@ -57,7 +59,7 @@ export class Api {
   }
 
   /**
-   * Gets a list of users.
+   * Gets a list of characters.
    */
   async getCharacters(): Promise<Types.GetCharactersResult> {
     // make the api call
@@ -71,8 +73,8 @@ export class Api {
 
     // transform the data into the format we are expecting
     try {
-      const rawUsers = response.data
-      const convertedCharacters: CharacterSnapshot[] = rawUsers.map(convertCharacter)
+      const rawCharacters = response.data
+      const convertedCharacters: CharacterSnapshot[] = rawCharacters.map(convertCharacter)
       return { kind: "ok", characters: convertedCharacters }
     } catch {
       return { kind: "bad-data" }
@@ -80,7 +82,7 @@ export class Api {
   }
 
   /**
-   * Gets a single user by ID
+   * Gets a single character by ID
    */
 
   async getCharacter(id: string): Promise<Types.GetCharacterResult> {
