@@ -3,15 +3,16 @@ import { Instance, SnapshotOut, types } from "mobx-state-tree"
 /**
  * Model description here for TypeScript hints.
  */
-export const CharacterModel = types
-  .model("Character")
+export const QuestionModel = types
+  .model("Question")
   .props({
     id: types.identifier,
-    name: types.maybe(types.string),
-    gender: types.maybe(types.string),
-    titles: types.optional(types.array(types.string), []),
-    playedBy: types.maybe(types.string),
-    isAlive: types.optional(types.boolean, true),
+    category: types.maybe(types.string),
+    type: types.enumeration(["multiple", "boolean"]),
+    difficulty: types.maybe(types.string),
+    question: types.maybe(types.string),
+    correctAnswer: types.maybe(types.string),
+    incorrectAnswers: types.optional(types.array(types.string), []),
   })
   .views(self => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
   .actions(self => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
@@ -24,7 +25,7 @@ export const CharacterModel = types
   *  .postProcessSnapshot(omit(["password", "socialSecurityNumber", "creditCardNumber"]))
   */
 
-type CharacterType = Instance<typeof CharacterModel>
-export interface Character extends CharacterType {}
-type CharacterSnapshotType = SnapshotOut<typeof CharacterModel>
-export interface CharacterSnapshot extends CharacterSnapshotType {}
+type QuestionType = Instance<typeof QuestionModel>
+export interface Question extends QuestionType {}
+type QuestionSnapshotType = SnapshotOut<typeof QuestionModel>
+export interface QuestionSnapshot extends QuestionSnapshotType {}

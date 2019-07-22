@@ -2,18 +2,21 @@ import { ApisauceInstance, create, ApiResponse } from "apisauce"
 import { getGeneralApiProblem } from "./api-problem"
 import { ApiConfig, DEFAULT_API_CONFIG } from "./api-config"
 import * as Types from "./api.types"
-import { CharacterSnapshot } from "../../models/character"
+import { QuestionSnapshot } from "../../models/question"
+import uuid from "react-native-uuid"
 
-const convertCharacter = (raw: any): CharacterSnapshot => {
-  const url: string = raw.url
-  const id = url.replace("https://anapioficeandfire.com/api/characters/", "")
+const API_PAGE_SIZE = 50
+
+const convertQuestion = (raw: any): QuestionSnapshot => {
+  const id = uuid.v1()
   return {
     id: id,
-    name: raw.name,
-    gender: raw.gender,
-    titles: raw.titles,
-    playedBy: raw.playedBy[0],
-    isAlive: raw.isAlive,
+    category: raw.category,
+    type: raw.type,
+    difficulty: raw.difficulty,
+    question: raw.question,
+    correctAnswer: raw.correct_answer,
+    incorrectAnswers: raw.incorrect_answers,
   }
 }
 
@@ -59,11 +62,11 @@ export class Api {
   }
 
   /**
-   * Gets a list of characters.
+   * Gets a list of trivia questions.
    */
-  async getCharacters(): Promise<Types.GetCharactersResult> {
+  async getQuestions(): Promise<Types.GetQuestionsResult> {
     // make the api call
-    const response: ApiResponse<any> = await this.apisauce.get(`/characters`)
+    const response: ApiResponse<any> = await this.apisauce.get("", { amount: API_PAGE_SIZE })
 
     // the typical ways to die when calling an api
     if (!response.ok) {
@@ -73,33 +76,11 @@ export class Api {
 
     // transform the data into the format we are expecting
     try {
-      const rawCharacters = response.data
-      const convertedCharacters: CharacterSnapshot[] = rawCharacters.map(convertCharacter)
-      return { kind: "ok", characters: convertedCharacters }
-    } catch {
-      return { kind: "bad-data" }
-    }
-  }
-
-  /**
-   * Gets a single character by ID
-   */
-
-  async getCharacter(id: string): Promise<Types.GetCharacterResult> {
-    // make the api call
-    const response: ApiResponse<any> = await this.apisauce.get(`/characters/${id}`)
-
-    // the typical ways to die when calling an api
-    if (!response.ok) {
-      const problem = getGeneralApiProblem(response)
-      if (problem) return problem
-    }
-
-    // transform the data into the format we are expecting
-    try {
-      const convertedCharacter: CharacterSnapshot = convertCharacter(response.data)
-      return { kind: "ok", character: convertedCharacter }
-    } catch {
+      const rawQuestions = response.data.results
+      const convertedQuestions: QuestionSnapshot[] = rawQuestions.map(convertQuestion)
+      return { kind: "ok", questions: convertedQuestions }
+    } catch (e) {
+      __DEV__ && console.tron.log(e.message)
       return { kind: "bad-data" }
     }
   }

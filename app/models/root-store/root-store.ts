@@ -1,4 +1,4 @@
-import { CharacterStoreModel } from "../../models/character-store"
+import { QuestionStoreModel } from "../question-store"
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
 import { NavigationStoreModel } from "../../navigation/navigation-store"
 
@@ -7,7 +7,7 @@ import { NavigationStoreModel } from "../../navigation/navigation-store"
  */
 export const RootStoreModel = types.model("RootStore").props({
   navigationStore: types.optional(NavigationStoreModel, {}),
-  characterStore: types.optional(CharacterStoreModel, {} as any),
+  questionStore: types.optional(QuestionStoreModel, {} as any),
 })
 
 /**

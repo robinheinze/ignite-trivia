@@ -12,7 +12,7 @@ import { BulletItem } from "../../components/bullet-item"
 import { Api } from "../../services/api"
 import { save } from "../../utils/storage"
 import { observer, inject } from "mobx-react"
-import { CharacterStore } from "../../models/character-store"
+import { QuestionStore } from "../../models/question-store"
 
 const FULL: ViewStyle = { flex: 1 }
 const CONTAINER: ViewStyle = {
@@ -83,16 +83,16 @@ const HINT: TextStyle = {
 }
 
 export interface DemoScreenProps extends NavigationScreenProps<{}> {
-  characterStore: CharacterStore
+  questionStore: QuestionStore
 }
 
 @observer
-@inject("characterStore")
+@inject("questionStore")
 export class DemoScreen extends React.Component<DemoScreenProps, {}> {
   goBack = () => this.props.navigation.goBack(null)
 
   demoReactotron = async () => {
-    this.props.characterStore.getCharacters()
+    this.props.questionStore.getQuestions()
     // console.tron.log("Your Friendly tron log message")
     // console.tron.logImportant("I am important")
     // console.tron.display({

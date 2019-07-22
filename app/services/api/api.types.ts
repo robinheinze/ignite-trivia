@@ -1,7 +1,4 @@
 import { GeneralApiProblem } from "./api-problem"
-import { CharacterSnapshot } from "../../models/character"
+import { QuestionSnapshot } from "../../models/question"
 
-export type GetCharactersResult =
-  | { kind: "ok"; characters: CharacterSnapshot[] }
-  | GeneralApiProblem
-export type GetCharacterResult = { kind: "ok"; character: CharacterSnapshot } | GeneralApiProblem
+export type GetQuestionsResult = { kind: "ok"; questions: QuestionSnapshot[] } | GeneralApiProblem

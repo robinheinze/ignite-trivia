@@ -19,6 +19,6 @@ export interface ApiConfig {
  * The default configuration for the app.
  */
 export const DEFAULT_API_CONFIG: ApiConfig = {
-  url: env.API || "https://www.anapioficeandfire.com/api",
+  url: env.API || "https://opentdb.com/api.php",
   timeout: 10000,
 }
