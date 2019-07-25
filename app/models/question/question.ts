@@ -1,7 +1,7 @@
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
-
+import shuffle from "lodash.shuffle"
 /**
- * Model description here for TypeScript hints.
+ * A trivia questions with several answer choices
  */
 export const QuestionModel = types
   .model("Question")
@@ -14,7 +14,11 @@ export const QuestionModel = types
     correctAnswer: types.maybe(types.string),
     incorrectAnswers: types.optional(types.array(types.string), []),
   })
-  .views(self => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
+  .views(self => ({
+    get allAnswers() {
+      return shuffle(self.incorrectAnswers.concat([self.correctAnswer]))
+    },
+  })) // eslint-disable-line @typescript-eslint/no-unused-vars
   .actions(self => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
 
 /**

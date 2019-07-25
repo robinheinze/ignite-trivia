@@ -5,8 +5,8 @@ import { color, spacing } from "../../theme"
  * All text will start off looking like this.
  */
 const BASE_VIEW: ViewStyle = {
-  paddingVertical: spacing[2],
-  paddingHorizontal: spacing[2],
+  paddingVertical: spacing.medium,
+  paddingHorizontal: spacing.medium,
   borderRadius: 4,
   justifyContent: "center",
   alignItems: "center",
@@ -25,7 +25,7 @@ export const viewPresets = {
   /**
    * A smaller piece of secondard information.
    */
-  primary: { ...BASE_VIEW, backgroundColor: color.palette.orange } as ViewStyle,
+  primary: { ...BASE_VIEW, backgroundColor: color.palette.lightGrey } as ViewStyle,
 
   /**
    * A button without extras.
@@ -39,7 +39,7 @@ export const viewPresets = {
 }
 
 export const textPresets = {
-  primary: { ...BASE_TEXT, fontSize: 9, color: color.palette.white } as TextStyle,
+  primary: { ...BASE_TEXT, fontSize: 14, color: color.palette.white } as TextStyle,
   link: {
     ...BASE_TEXT,
     color: color.text,
