@@ -13,7 +13,7 @@ const BASE_VIEW: ViewStyle = {
 }
 
 const BASE_TEXT: TextStyle = {
-  paddingHorizontal: spacing[3],
+  paddingHorizontal: spacing.medium,
 }
 
 /**

@@ -1,6 +1,6 @@
 import * as React from "react"
 import { observer, inject } from "mobx-react"
-import { ViewStyle, View, FlatList, TextStyle } from "react-native"
+import { ViewStyle, View, FlatList, TextStyle, TouchableOpacity } from "react-native"
 import { Text } from "../../components/text"
 import { Screen } from "../../components/screen"
 import { color, spacing } from "../../theme"
@@ -65,9 +65,9 @@ export class QuestionScreen extends React.Component<QuestionScreenProps, {}> {
         <View>
           {question.allAnswers.map((a, index) => {
             return (
-              <View key={index} style={ANSWER_WRAPPER}>
+              <TouchableOpacity key={index} style={ANSWER_WRAPPER}>
                 <Text style={ANSWER} text={a} />
-              </View>
+              </TouchableOpacity>
             )
           })}
         </View>

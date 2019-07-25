@@ -18,6 +18,9 @@ export const QuestionModel = types
     get allAnswers() {
       return shuffle(self.incorrectAnswers.concat([self.correctAnswer]))
     },
+    isCorrectAnswer(guess: string) {
+      return guess === self.correctAnswer
+    },
   })) // eslint-disable-line @typescript-eslint/no-unused-vars
   .actions(self => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
 

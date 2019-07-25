@@ -17,11 +17,11 @@ import { QuestionStore } from "../../models/question-store"
 const FULL: ViewStyle = { flex: 1 }
 const CONTAINER: ViewStyle = {
   backgroundColor: color.transparent,
-  paddingHorizontal: spacing[4],
+  paddingHorizontal: spacing.mediumer,
 }
 const DEMO: ViewStyle = {
-  paddingVertical: spacing[4],
-  paddingHorizontal: spacing[4],
+  paddingVertical: spacing.mediumer,
+  paddingHorizontal: spacing.mediumer,
   backgroundColor: "#5D2555",
 }
 const BOLD: TextStyle = { fontWeight: "bold" }
@@ -31,8 +31,8 @@ const DEMO_TEXT: TextStyle = {
   letterSpacing: 2,
 }
 const HEADER: TextStyle = {
-  paddingTop: spacing[3],
-  paddingBottom: spacing[5] - 1,
+  paddingTop: spacing.medium,
+  paddingBottom: spacing.large - 1,
   paddingHorizontal: 0,
 }
 const HEADER_TITLE: TextStyle = {
@@ -47,13 +47,13 @@ const TITLE: TextStyle = {
   fontSize: 28,
   lineHeight: 38,
   textAlign: "center",
-  marginBottom: spacing[5],
+  marginBottom: spacing.large,
 }
 const TAGLINE: TextStyle = {
   color: "#BAB6C8",
   fontSize: 15,
   lineHeight: 22,
-  marginBottom: spacing[4] + spacing[1],
+  marginBottom: spacing.mediumer + spacing.tiny,
 }
 const IGNITE: ImageStyle = {
   marginVertical: spacing[6],
@@ -70,7 +70,7 @@ const LOVE: TextStyle = {
   lineHeight: 22,
 }
 const HEART: ImageStyle = {
-  marginHorizontal: spacing[2],
+  marginHorizontal: spacing.small,
   width: 10,
   height: 10,
   resizeMode: "contain",
@@ -79,7 +79,7 @@ const HINT: TextStyle = {
   color: "#BAB6C8",
   fontSize: 12,
   lineHeight: 15,
-  marginVertical: spacing[2],
+  marginVertical: spacing.small,
 }
 
 export interface DemoScreenProps extends NavigationScreenProps<{}> {

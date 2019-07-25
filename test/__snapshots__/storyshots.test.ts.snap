@@ -114,12 +114,12 @@ exports[`Storyshots Button Style Presets 1`] = `
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "#FBA928",
+                  "backgroundColor": "#939AA4",
                   "borderRadius": 4,
                   "justifyContent": "center",
                   "opacity": 1,
-                  "paddingHorizontal": 8,
-                  "paddingVertical": 8,
+                  "paddingHorizontal": 12,
+                  "paddingVertical": 12,
                 }
               }
             >
@@ -128,7 +128,7 @@ exports[`Storyshots Button Style Presets 1`] = `
                   Object {
                     "color": "#ffffff",
                     "fontFamily": "Montserrat",
-                    "fontSize": 9,
+                    "fontSize": 14,
                     "paddingHorizontal": 12,
                   }
                 }
@@ -228,12 +228,12 @@ exports[`Storyshots Button Style Presets 1`] = `
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "#FBA928",
+                  "backgroundColor": "#939AA4",
                   "borderRadius": 4,
                   "justifyContent": "center",
                   "opacity": 1,
-                  "paddingHorizontal": 8,
-                  "paddingVertical": 8,
+                  "paddingHorizontal": 12,
+                  "paddingVertical": 12,
                 }
               }
             >
@@ -242,7 +242,7 @@ exports[`Storyshots Button Style Presets 1`] = `
                   Object {
                     "color": "#ffffff",
                     "fontFamily": "Montserrat",
-                    "fontSize": 9,
+                    "fontSize": 14,
                     "paddingHorizontal": 12,
                   }
                 }
@@ -342,11 +342,11 @@ exports[`Storyshots Button Style Presets 1`] = `
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "#FBA928",
+                  "backgroundColor": "#939AA4",
                   "borderRadius": 0,
                   "justifyContent": "center",
                   "opacity": 1,
-                  "paddingHorizontal": 8,
+                  "paddingHorizontal": 12,
                   "paddingVertical": 100,
                 }
               }
@@ -3429,7 +3429,7 @@ exports[`Storyshots Switch Behaviour 1`] = `
               <View
                 style={
                   Object {
-                    "backgroundColor": "#ffffff",
+                    "backgroundColor": "#20162D",
                     "borderColor": "rgba(0, 0, 0, 0.1)",
                     "borderRadius": 15,
                     "borderWidth": 1,
@@ -3555,7 +3555,7 @@ exports[`Storyshots Switch Behaviour 1`] = `
               <View
                 style={
                   Object {
-                    "backgroundColor": "#ffffff",
+                    "backgroundColor": "#20162D",
                     "borderColor": "rgba(0, 0, 0, 0.1)",
                     "borderRadius": 15,
                     "borderWidth": 1,
@@ -3681,7 +3681,7 @@ exports[`Storyshots Switch Behaviour 1`] = `
               <View
                 style={
                   Object {
-                    "backgroundColor": "#ffffff",
+                    "backgroundColor": "#20162D",
                     "borderColor": "rgba(0, 0, 0, 0.1)",
                     "borderRadius": 15,
                     "borderWidth": 1,

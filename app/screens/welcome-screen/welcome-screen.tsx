@@ -12,7 +12,7 @@ import { bowserLogo } from "./"
 const FULL: ViewStyle = { flex: 1 }
 const CONTAINER: ViewStyle = {
   backgroundColor: color.transparent,
-  paddingHorizontal: spacing[4],
+  paddingHorizontal: spacing.mediumer,
 }
 const TEXT: TextStyle = {
   color: color.palette.white,
@@ -20,8 +20,8 @@ const TEXT: TextStyle = {
 }
 const BOLD: TextStyle = { fontWeight: "bold" }
 const HEADER: TextStyle = {
-  paddingTop: spacing[3],
-  paddingBottom: spacing[4] + spacing[1],
+  paddingTop: spacing.medium,
+  paddingBottom: spacing.mediumer + spacing.tiny,
   paddingHorizontal: 0,
 }
 const HEADER_TITLE: TextStyle = {
@@ -51,7 +51,7 @@ const ALMOST: TextStyle = {
 }
 const BOWSER: ImageStyle = {
   alignSelf: "center",
-  marginVertical: spacing[5],
+  marginVertical: spacing.large,
   maxWidth: "100%",
 }
 const CONTENT: TextStyle = {
@@ -59,11 +59,11 @@ const CONTENT: TextStyle = {
   color: "#BAB6C8",
   fontSize: 15,
   lineHeight: 22,
-  marginBottom: spacing[5],
+  marginBottom: spacing.large,
 }
 const CONTINUE: ViewStyle = {
-  paddingVertical: spacing[4],
-  paddingHorizontal: spacing[4],
+  paddingVertical: spacing.mediumer,
+  paddingHorizontal: spacing.mediumer,
   backgroundColor: "#5D2555",
 }
 const CONTINUE_TEXT: TextStyle = {
@@ -74,8 +74,8 @@ const CONTINUE_TEXT: TextStyle = {
 }
 const FOOTER: ViewStyle = { backgroundColor: "#20162D" }
 const FOOTER_CONTENT: ViewStyle = {
-  paddingVertical: spacing[4],
-  paddingHorizontal: spacing[4],
+  paddingVertical: spacing.mediumer,
+  paddingHorizontal: spacing.mediumer,
 }
 
 export interface WelcomeScreenProps extends NavigationScreenProps<{}> {}
@@ -87,15 +87,8 @@ export class WelcomeScreen extends React.Component<WelcomeScreenProps, {}> {
     return (
       <View style={FULL}>
         <Wallpaper />
-        <Screen
-          style={CONTAINER}
-          preset="scroll"
-          backgroundColor={color.transparent}>
-          <Header
-            headerTx="welcomeScreen.poweredBy"
-            style={HEADER}
-            titleStyle={HEADER_TITLE}
-          />
+        <Screen style={CONTAINER} preset="scroll" backgroundColor={color.transparent}>
+          <Header headerTx="welcomeScreen.poweredBy" style={HEADER} titleStyle={HEADER_TITLE} />
           <Text style={TITLE_WRAPPER}>
             <Text style={TITLE} text="Your new app, " />
             <Text style={ALMOST} text="almost" />
@@ -104,10 +97,12 @@ export class WelcomeScreen extends React.Component<WelcomeScreenProps, {}> {
           <Text style={TITLE} preset="header" tx="welcomeScreen.readyForLaunch" />
           <Image source={bowserLogo} style={BOWSER} />
           <Text style={CONTENT}>
-            This probably isn't what your app is going to look like. Unless your designer handed you this screen and, in that case, congrats! You're ready to ship.
+            This probably isn't what your app is going to look like. Unless your designer handed you
+            this screen and, in that case, congrats! You're ready to ship.
           </Text>
           <Text style={CONTENT}>
-            For everyone else, this is where you'll see a live preview of your fully functioning app using Ignite.
+            For everyone else, this is where you'll see a live preview of your fully functioning app
+            using Ignite.
           </Text>
         </Screen>
         <SafeAreaView style={FOOTER}>
