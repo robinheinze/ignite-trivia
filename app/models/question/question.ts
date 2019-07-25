@@ -15,13 +15,15 @@ export const QuestionModel = types
     incorrectAnswers: types.optional(types.array(types.string), []),
   })
   .views(self => ({
-    get allAnswers() {
-      return shuffle(self.incorrectAnswers.concat([self.correctAnswer]))
+    get radioProps() {
+      const allAnswers = self.incorrectAnswers.concat([self.correctAnswer])
+      const radioProps = allAnswers.map(answer => ({ label: answer, value: answer }))
+      return shuffle(radioProps)
     },
     isCorrectAnswer(guess: string) {
       return guess === self.correctAnswer
     },
-  })) // eslint-disable-line @typescript-eslint/no-unused-vars
+  }))
   .actions(self => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
 
 /**
