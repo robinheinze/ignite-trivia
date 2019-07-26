@@ -6,7 +6,7 @@ import { QuestionSnapshot } from "../../models/question"
 import uuid from "react-native-uuid"
 import { decodeHTMLEntities } from "../../utils/html-decode"
 
-const API_PAGE_SIZE = 5
+const API_PAGE_SIZE = 10
 
 const convertQuestion = (raw: any): QuestionSnapshot => {
   const id = uuid.v1()

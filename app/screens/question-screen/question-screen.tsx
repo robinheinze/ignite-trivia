@@ -88,8 +88,9 @@ export class QuestionScreen extends React.Component<QuestionScreenProps, Questio
     }
   }
 
-  renderAnswer = (answer: string, selected: boolean, onSelect: () => void, index) => {
+  renderAnswer = (answer: string, selected: boolean, onSelect: () => void, index: number) => {
     const style: TextStyle = selected ? { fontWeight: "bold", fontSize: 14 } : {}
+
     return (
       <TouchableOpacity key={index} onPress={onSelect} style={ANSWER_WRAPPER}>
         <Text style={{ ...ANSWER, ...style }} text={answer} />
@@ -99,6 +100,7 @@ export class QuestionScreen extends React.Component<QuestionScreenProps, Questio
 
   renderQuestion = ({ item }) => {
     const question: Question = item
+
     return (
       <View style={QUESTION_WRAPPER}>
         <Text style={QUESTION} text={question.question} />
