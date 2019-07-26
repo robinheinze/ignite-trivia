@@ -12,7 +12,7 @@ const convertQuestion = (raw: any): QuestionSnapshot => {
   const id = uuid.v1()
   const decodedQuestion = decodeHTMLEntities(raw.question)
   const decodedAnswers = raw.incorrect_answers.map(a => decodeHTMLEntities(a))
-  console.tron.log(decodedAnswers)
+
   return {
     id: id,
     category: raw.category,
@@ -21,6 +21,7 @@ const convertQuestion = (raw: any): QuestionSnapshot => {
     question: decodedQuestion,
     correctAnswer: decodeHTMLEntities(raw.correct_answer),
     incorrectAnswers: decodedAnswers,
+    guess: "",
   }
 }
 

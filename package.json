@@ -35,7 +35,7 @@
     "react-native-gesture-handler": "1.1.0",
     "react-native-keychain": "3.0.0",
     "react-native-localize": "^1.0.0",
-    "react-native-simple-radio-button": "^2.7.3",
+    "react-native-radio-buttons": "^1.0.0",
     "react-native-splash-screen": "3.1.1",
     "react-native-uuid": "^1.4.9",
     "react-navigation": "3.0.0",

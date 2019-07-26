@@ -10,6 +10,7 @@ var entities = {
   uuml: "ü",
   oacute: "ó",
   aacute: "á",
+  eacute: "é",
   ntilde: "ñ",
 }
 entities["#039"] = "'"
@@ -18,8 +19,6 @@ var entityPattern: RegExp = /&(([a-z0-9]|#)+);/gi
 export const decodeHTMLEntities = (text: string): string => {
   // A single replace pass with a static RegExp is faster than a loop
   return text.replace(entityPattern, (match, entity) => {
-    const replacement = entities[entity]
-    console.tron.log({ entity, match, replacement })
     entity = entity.toLowerCase()
     if (entities.hasOwnProperty(entity)) {
       return entities[entity]
