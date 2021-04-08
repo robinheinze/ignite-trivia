@@ -5,15 +5,17 @@ import * as React from "react"
 import { View, ViewStyle } from "react-native"
 import { storiesOf } from "@storybook/react-native"
 import { StoryScreen, Story, UseCase } from "../../../storybook/views"
-import { Checkbox } from "./"
+import { Checkbox } from "./checkbox"
 import { Toggle } from "react-powerplug"
+
+declare let module
 
 const arrayStyle: ViewStyle[] = [{ paddingVertical: 40 }, { alignSelf: "flex-end" }]
 const arrayOutlineStyle: ViewStyle[] = [{ borderColor: "#b443c9" }, { borderWidth: 25 }]
 const arrayFillStyle: ViewStyle[] = [{ backgroundColor: "#55e0ff" }]
 
 storiesOf("Checkbox", module)
-  .addDecorator(fn => <StoryScreen>{fn()}</StoryScreen>)
+  .addDecorator((fn) => <StoryScreen>{fn()}</StoryScreen>)
   .add("Behaviour", () => (
     <Story>
       <UseCase text="The Checkbox" usage="Use the checkbox to represent on/off states.">
@@ -36,7 +38,7 @@ storiesOf("Checkbox", module)
           {({ on, toggle }) => (
             <View>
               <Checkbox
-                text="We’re an App Design & Development Team. Experts in mobile & web technologies. We create beautiful, functional mobile apps and websites. "
+                text="We’re an App Design & Development Team. Experts in mobile & web technologies. We create beautiful, functional mobile apps and websites."
                 value={on}
                 multiline
                 onToggle={toggle}

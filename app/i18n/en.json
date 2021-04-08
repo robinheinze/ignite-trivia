@@ -8,8 +8,7 @@
     "invalidEmail": "Invalid email address."
   },
   "questionScreen": {
-    "header": "Questions",
-    "button": "Get More Questions"
+    "header": "Questions"
   },
   "storybook": {
     "placeholder": "Placeholder",

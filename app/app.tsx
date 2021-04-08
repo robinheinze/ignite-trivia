@@ -1,85 +1,81 @@
-// Welcome to the main entry point of the app.
-//
-// In this file, we'll be kicking off our app or storybook.
-
+/**
+ * Welcome to the main entry point of the app. In this file, we'll
+ * be kicking off our app.
+ *
+ * Most of this file is boilerplate and you shouldn't need to modify
+ * it very often. But take some time to look through and understand
+ * what is going on here.
+ *
+ * The app navigation resides in ./app/navigators, so head over there
+ * if you're interested in adding screens and navigators.
+ */
 import "./i18n"
-import * as React from "react"
-import { AppRegistry } from "react-native"
-import { StatefulNavigator } from "./navigation"
-import { StorybookUIRoot } from "../storybook"
-import { RootStore, setupRootStore } from "./models/root-store"
-import { Provider } from "mobx-react"
-import { BackButtonHandler } from "./navigation/back-button-handler"
-import { contains } from "ramda"
-import { DEFAULT_NAVIGATION_CONFIG } from "./navigation/navigation-config"
+import "./utils/ignore-warnings"
+import React, { useState, useEffect, useRef } from "react"
+import { NavigationContainerRef } from "@react-navigation/native"
+import { SafeAreaProvider, initialWindowMetrics } from "react-native-safe-area-context"
+import { initFonts } from "./theme/fonts" // expo
+import * as storage from "./utils/storage"
+import {
+  useBackButtonHandler,
+  RootNavigator,
+  canExit,
+  setRootNavigation,
+  useNavigationPersistence,
+} from "./navigators"
+import { RootStore, RootStoreProvider, setupRootStore } from "./models"
+import { ToggleStorybook } from "../storybook/toggle-storybook"
 
-interface AppState {
-  rootStore?: RootStore
-}
+// This puts screens in a native ViewController or Activity. If you want fully native
+// stack navigation, use `createNativeStackNavigator` in place of `createStackNavigator`:
+// https://github.com/kmagiera/react-native-screens#using-native-stack-navigator
+import { enableScreens } from "react-native-screens"
+enableScreens()
+
+export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
 
 /**
  * This is the root component of our app.
  */
-export class App extends React.Component<{}, AppState> {
-  /**
-   * When the component is mounted. This happens asynchronously and simply
-   * re-renders when we're good to go.
-   */
-  async componentDidMount() {
-    this.setState({
-      rootStore: await setupRootStore(),
-    })
-  }
+function App() {
+  const navigationRef = useRef<NavigationContainerRef>()
+  const [rootStore, setRootStore] = useState<RootStore | undefined>(undefined)
 
-  /**
-   * Are we allowed to exit the app?  This is called when the back button
-   * is pressed on android.
-   *
-   * @param routeName The currently active route name.
-   */
-  canExit(routeName: string) {
-    return contains(routeName, DEFAULT_NAVIGATION_CONFIG.exitRoutes)
-  }
+  setRootNavigation(navigationRef)
+  useBackButtonHandler(navigationRef, canExit)
+  const { initialNavigationState, onNavigationStateChange } = useNavigationPersistence(
+    storage,
+    NAVIGATION_PERSISTENCE_KEY,
+  )
 
-  render() {
-    const rootStore = this.state && this.state.rootStore
+  // Kick off initial async loading actions, like loading fonts and RootStore
+  useEffect(() => {
+    ;(async () => {
+      await initFonts() // expo
+      setupRootStore().then(setRootStore)
+    })()
+  }, [])
 
-    // Before we show the app, we have to wait for our state to be ready.
-    // In the meantime, don't render anything. This will be the background
-    // color set in native by rootView's background color.
-    //
-    // This step should be completely covered over by the splash screen though.
-    //
-    // You're welcome to swap in your own component to render if your boot up
-    // sequence is too slow though.
-    if (!rootStore) {
-      return null
-    }
+  // Before we show the app, we have to wait for our state to be ready.
+  // In the meantime, don't render anything. This will be the background
+  // color set in native by rootView's background color. You can replace
+  // with your own loading component if you wish.
+  if (!rootStore) return null
 
-    // otherwise, we're ready to render the app
-
-    // wire stores defined in root-store.ts file
-    const { navigationStore, ...otherStores } = rootStore
-
-    return (
-      <Provider rootStore={rootStore} navigationStore={navigationStore} {...otherStores}>
-        <BackButtonHandler canExit={this.canExit}>
-          <StatefulNavigator />
-        </BackButtonHandler>
-      </Provider>
-    )
-  }
+  // otherwise, we're ready to render the app
+  return (
+    <ToggleStorybook>
+      <RootStoreProvider value={rootStore}>
+        <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+          <RootNavigator
+            ref={navigationRef}
+            initialState={initialNavigationState}
+            onStateChange={onNavigationStateChange}
+          />
+        </SafeAreaProvider>
+      </RootStoreProvider>
+    </ToggleStorybook>
+  )
 }
 
-/**
- * This needs to match what's found in your app_delegate.m and MainActivity.java.
- */
-const APP_NAME = "IgniteTrivia"
-
-// Should we show storybook instead of our app?
-//
-// ⚠️ Leave this as `false` when checking into git.
-const SHOW_STORYBOOK = false
-
-const RootComponent = SHOW_STORYBOOK && __DEV__ ? StorybookUIRoot : App
-AppRegistry.registerComponent(APP_NAME, () => RootComponent)
+export default App

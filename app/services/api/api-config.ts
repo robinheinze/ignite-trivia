@@ -1,5 +1,3 @@
-import * as env from "../../environment-variables"
-
 /**
  * The options used to configure the API.
  */
@@ -19,6 +17,6 @@ export interface ApiConfig {
  * The default configuration for the app.
  */
 export const DEFAULT_API_CONFIG: ApiConfig = {
-  url: env.API || "https://opentdb.com/api.php",
+  url: "https://opentdb.com/api.php",
   timeout: 10000,
 }
