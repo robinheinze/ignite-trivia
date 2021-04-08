@@ -1,7 +1,8 @@
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
 import shuffle from "lodash.shuffle"
+
 /**
- * A trivia questions with several answer choices
+ * Model description here for TypeScript hints.
  */
 export const QuestionModel = types
   .model("Question")
@@ -15,19 +16,19 @@ export const QuestionModel = types
     incorrectAnswers: types.optional(types.array(types.string), []),
     guess: types.optional(types.string, ""),
   })
-  .views(self => ({
+  .views((self) => ({
     get allAnswers() {
       return shuffle(self.incorrectAnswers.concat([self.correctAnswer]))
     },
     get isCorrect() {
       return self.guess === self.correctAnswer
     },
-  }))
-  .actions(self => ({
+  })) // eslint-disable-line @typescript-eslint/no-unused-vars
+  .actions((self) => ({
     setGuess(guess: string) {
       self.guess = guess
     },
-  }))
+  })) // eslint-disable-line @typescript-eslint/no-unused-vars
 
 /**
   * Un-comment the following to omit model attributes from your snapshots (and from async storage).
@@ -41,3 +42,4 @@ type QuestionType = Instance<typeof QuestionModel>
 export interface Question extends QuestionType {}
 type QuestionSnapshotType = SnapshotOut<typeof QuestionModel>
 export interface QuestionSnapshot extends QuestionSnapshotType {}
+export const createQuestionDefaultModel = () => types.optional(QuestionModel, {})

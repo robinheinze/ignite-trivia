@@ -2,16 +2,16 @@ import { ApisauceInstance, create, ApiResponse } from "apisauce"
 import { getGeneralApiProblem } from "./api-problem"
 import { ApiConfig, DEFAULT_API_CONFIG } from "./api-config"
 import * as Types from "./api.types"
-import { QuestionSnapshot } from "../../models/question"
-import uuid from "react-native-uuid"
+import { QuestionSnapshot } from "../../models/question/question"
+import * as uuid from "react-native-uuid"
 import { decodeHTMLEntities } from "../../utils/html-decode"
 
 const API_PAGE_SIZE = 10
 
 const convertQuestion = (raw: any): QuestionSnapshot => {
-  const id = uuid.v1()
+  const id = uuid.v1().toString()
   const decodedQuestion = decodeHTMLEntities(raw.question)
-  const decodedAnswers = raw.incorrect_answers.map(a => decodeHTMLEntities(a))
+  const decodedAnswers = raw.incorrect_answers.map((a) => decodeHTMLEntities(a))
 
   return {
     id: id,

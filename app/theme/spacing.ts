@@ -1,7 +1,7 @@
 /**
  * NOTE TO DEVS:
  *
- * Spacing should consistent and whitespace thought of as a first class technique up
+ * Spacing should be consistent and whitespace thought of as a first class technique up
  * there with color and typefaces.
  *
  * Which type of scale you use is based on the design.
@@ -22,29 +22,14 @@
  * Feel free to delete this block.
  */
 
-/**
- * The available spacing.
- *
- * Here's the rough guideline.  Customize this for you usage.  It's ok to put exceptions
- * within the components themselves if they are truly exceptions.
- *
- * 0 = none    - nothing. only here to bust out of a zero-based array.
- * 1 = tiny    - elements contextually close to each other
- * 2 = smaller - for groups of closely related items or perhaps borders
- * 3 = small   - ?
- * 4 = medium  - ?
- * 5 = medium+ - ?
- * 6 = large   - between groups of content that aren't related?
- * 7 = huge    - ?
- * 8 = massive - an uncomfortable amount of whitespace
- */
-
 export const spacing = {
+  none: 0,
   tiny: 4,
-  small: 8,
-  medium: 12,
-  mediumer: 16,
-  large: 24,
-  extraLarge: 48,
-  huge: 64,
+  smaller: 8,
+  small: 12,
+  medium: 16,
+  mediumPlus: 24,
+  large: 32,
+  huge: 48,
+  massive: 64,
 }

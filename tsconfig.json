@@ -11,8 +11,11 @@
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "sourceMap": true,
-    "target": "es2015"
+    "target": "esnext",
+    "lib": ["esnext"],
+    "skipLibCheck": true,
+    "resolveJsonModule": true
   },
   "exclude": ["node_modules"],
-  "include": ["app", "test", "storybook"]
+  "include": ["index.js", "app", "test", "storybook"]
 }

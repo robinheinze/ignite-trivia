@@ -8,6 +8,8 @@ import { StoryScreen, Story, UseCase } from "../../../storybook/views"
 import { color } from "../../theme"
 import { Text } from "./text"
 
+declare let module
+
 const VIEWSTYLE = {
   flex: 1,
   backgroundColor: color.storybookDarkBg,
@@ -15,7 +17,7 @@ const VIEWSTYLE = {
 const viewStyleArray: ViewStyle[] = [VIEWSTYLE, { backgroundColor: "#7fff00" }]
 
 storiesOf("Text", module)
-  .addDecorator(fn => <StoryScreen>{fn()}</StoryScreen>)
+  .addDecorator((fn) => <StoryScreen>{fn()}</StoryScreen>)
   .add("Style Presets", () => (
     <Story>
       <UseCase text="default" usage="Used for normal body text.">
@@ -55,7 +57,7 @@ storiesOf("Text", module)
       <UseCase text="tx" usage="Used for looking up i18n keys.">
         <View style={VIEWSTYLE}>
           <Text tx="common.ok" />
-          <Text tx="omglol" />
+          <Text tx="common.cancel" />
         </View>
       </UseCase>
       <UseCase

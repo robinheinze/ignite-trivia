@@ -1,14 +1,13 @@
-import * as React from "react"
-import { View, TextInput, TextStyle, ViewStyle } from "react-native"
+import React from "react"
+import { TextInput, TextInputProps, TextStyle, View, ViewStyle } from "react-native"
 import { color, spacing, typography } from "../../theme"
-import { translate } from "../../i18n"
-import { Text } from "../text"
-import { TextFieldProps } from "./text-field.props"
+import { translate, TxKeyPath } from "../../i18n"
+import { Text } from "../text/text"
 import { mergeAll, flatten } from "ramda"
 
 // the base styling for the container
 const CONTAINER: ViewStyle = {
-  paddingVertical: spacing.medium,
+  paddingVertical: spacing[3],
 }
 
 // the base styling for the TextInput
@@ -25,6 +24,45 @@ const PRESETS: { [name: string]: ViewStyle } = {
   default: {},
 }
 
+export interface TextFieldProps extends TextInputProps {
+  /**
+   * The placeholder i18n key.
+   */
+  placeholderTx?: TxKeyPath
+
+  /**
+   * The Placeholder text if no placeholderTx is provided.
+   */
+  placeholder?: string
+
+  /**
+   * The label i18n key.
+   */
+  labelTx?: TxKeyPath
+
+  /**
+   * The label text if no labelTx is provided.
+   */
+  label?: string
+
+  /**
+   * Optional container style overrides useful for margins & padding.
+   */
+  style?: ViewStyle | ViewStyle[]
+
+  /**
+   * Optional style overrides for the input.
+   */
+  inputStyle?: TextStyle | TextStyle[]
+
+  /**
+   * Various look & feels.
+   */
+  preset?: keyof typeof PRESETS
+
+  forwardedRef?: any
+}
+
 const enhance = (style, styleOverride) => {
   return mergeAll(flatten([style, styleOverride]))
 }
@@ -32,38 +70,36 @@ const enhance = (style, styleOverride) => {
 /**
  * A component which has a label and an input together.
  */
-export class TextField extends React.Component<TextFieldProps, {}> {
-  render() {
-    const {
-      placeholderTx,
-      placeholder,
-      labelTx,
-      label,
-      preset = "default",
-      style: styleOverride,
-      inputStyle: inputStyleOverride,
-      forwardedRef,
-      ...rest
-    } = this.props
-    let containerStyle: ViewStyle = { ...CONTAINER, ...PRESETS[preset] }
-    containerStyle = enhance(containerStyle, styleOverride)
+export function TextField(props: TextFieldProps) {
+  const {
+    placeholderTx,
+    placeholder,
+    labelTx,
+    label,
+    preset = "default",
+    style: styleOverride,
+    inputStyle: inputStyleOverride,
+    forwardedRef,
+    ...rest
+  } = props
+  let containerStyle: ViewStyle = { ...CONTAINER, ...PRESETS[preset] }
+  containerStyle = enhance(containerStyle, styleOverride)
 
-    let inputStyle: TextStyle = INPUT
-    inputStyle = enhance(inputStyle, inputStyleOverride)
-    const actualPlaceholder = placeholderTx ? translate(placeholderTx) : placeholder
+  let inputStyle: TextStyle = INPUT
+  inputStyle = enhance(inputStyle, inputStyleOverride)
+  const actualPlaceholder = placeholderTx ? translate(placeholderTx) : placeholder
 
-    return (
-      <View style={containerStyle}>
-        <Text preset="fieldLabel" tx={labelTx} text={label} />
-        <TextInput
-          placeholder={actualPlaceholder}
-          placeholderTextColor={color.palette.lighterGrey}
-          underlineColorAndroid={color.transparent}
-          {...rest}
-          style={inputStyle}
-          ref={forwardedRef}
-        />
-      </View>
-    )
-  }
+  return (
+    <View style={containerStyle}>
+      <Text preset="fieldLabel" tx={labelTx} text={label} />
+      <TextInput
+        placeholder={actualPlaceholder}
+        placeholderTextColor={color.palette.lighterGrey}
+        underlineColorAndroid={color.transparent}
+        {...rest}
+        style={inputStyle}
+        ref={forwardedRef}
+      />
+    </View>
+  )
 }
