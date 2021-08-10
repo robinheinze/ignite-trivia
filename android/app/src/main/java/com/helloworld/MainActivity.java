@@ -1,4 +1,4 @@
-package com.helloworld;
+package com.ignitetrivia;
 
 import com.facebook.react.ReactActivity;
 
