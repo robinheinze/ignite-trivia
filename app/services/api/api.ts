@@ -4,23 +4,20 @@ import { ApiConfig, DEFAULT_API_CONFIG } from "./api-config"
 import * as Types from "./api.types"
 import { QuestionSnapshot } from "../../models/question/question"
 import * as uuid from "react-native-uuid"
-import { decodeHTMLEntities } from "../../utils/html-decode"
 
-const API_PAGE_SIZE = 10
+const API_PAGE_SIZE = 50
 
 const convertQuestion = (raw: any): QuestionSnapshot => {
-  const id = uuid.v1().toString()
-  const decodedQuestion = decodeHTMLEntities(raw.question)
-  const decodedAnswers = raw.incorrect_answers.map((a) => decodeHTMLEntities(a))
+  const id = uuid.default.v1().toString()
 
   return {
-    id: id,
+    id,
     category: raw.category,
     type: raw.type,
     difficulty: raw.difficulty,
-    question: decodedQuestion,
-    correctAnswer: decodeHTMLEntities(raw.correct_answer),
-    incorrectAnswers: decodedAnswers,
+    question: raw.question,
+    correctAnswer: raw.correct_answer,
+    incorrectAnswers: raw.incorrect_answers,
     guess: "",
   }
 }
@@ -67,11 +64,13 @@ export class Api {
   }
 
   /**
-   * Gets a list of trivia questions.
+   * Gets a list of users.
    */
   async getQuestions(): Promise<Types.GetQuestionsResult> {
     // make the api call
-    const response: ApiResponse<any> = await this.apisauce.get("", { amount: API_PAGE_SIZE })
+    const response: ApiResponse<any> = await this.apisauce.get("", {
+      amount: API_PAGE_SIZE,
+    })
 
     // the typical ways to die when calling an api
     if (!response.ok) {
@@ -90,3 +89,7 @@ export class Api {
     }
   }
 }
+
+/**
+ * Gets a single user by ID
+ */

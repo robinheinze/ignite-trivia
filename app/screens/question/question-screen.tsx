@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react"
 import { observer } from "mobx-react-lite"
 import { Alert, FlatList, TextStyle, TouchableOpacity, View, ViewStyle } from "react-native"
-import { RadioButtons } from "react-native-radio-buttons"
-import { Screen, Text, Button } from "../../components"
+import { Button, Screen, Text } from "../../components"
+// import { useNavigation } from "@react-navigation/native"
+import { useStores } from "../../models"
 import { color, spacing } from "../../theme"
-import { useStores } from "../../models/root-store/root-store-context"
 import { Question } from "../../models/question/question"
 import { decodeHTMLEntities } from "../../utils/html-decode"
+import { RadioButtons } from "react-native-radio-buttons"
 
 const ROOT: ViewStyle = {
   flex: 1,
@@ -50,7 +51,6 @@ const CHECK_ANSWER: ViewStyle = {
 }
 
 export const QuestionScreen = observer(function QuestionScreen() {
-  // Are we refreshing the data
   const [refreshing, setRefreshing] = useState(false)
 
   // Pull in one of our MST stores
@@ -58,12 +58,12 @@ export const QuestionScreen = observer(function QuestionScreen() {
   const { questions } = questionStore
 
   useEffect(() => {
-    fetchQuestions()
+    setTimeout(fetchQuestions, 1)
   }, [])
 
-  const fetchQuestions = () => {
+  const fetchQuestions = async () => {
     setRefreshing(true)
-    questionStore.getQuestions()
+    await questionStore.getQuestions()
     setRefreshing(false)
   }
 
@@ -95,7 +95,7 @@ export const QuestionScreen = observer(function QuestionScreen() {
         <Text style={QUESTION} text={decodeHTMLEntities(question.question)} />
         <RadioButtons
           options={question.allAnswers}
-          onSelection={(guess) => onPressAnswer(question, guess)}
+          onSelection={(guess: string) => onPressAnswer(question, guess)}
           selectedOption={question.guess}
           renderOption={renderAnswer}
         />
@@ -103,6 +103,9 @@ export const QuestionScreen = observer(function QuestionScreen() {
       </View>
     )
   }
+
+  // Pull in navigation via hook
+  // const navigation = useNavigation()
   return (
     <Screen style={ROOT} preset="fixed">
       <View style={HEADER_CONTAINER}>
