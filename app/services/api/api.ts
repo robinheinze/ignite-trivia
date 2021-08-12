@@ -64,7 +64,7 @@ export class Api {
   }
 
   /**
-   * Gets a list of users.
+   * Gets a list of trivia questions.
    */
   async getQuestions(): Promise<Types.GetQuestionsResult> {
     // make the api call
@@ -89,7 +89,3 @@ export class Api {
     }
   }
 }
-
-/**
- * Gets a single user by ID
- */

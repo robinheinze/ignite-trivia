@@ -58,6 +58,8 @@ export const QuestionScreen = observer(function QuestionScreen() {
   const { questions } = questionStore
 
   useEffect(() => {
+    // Hack to work around actions failing to resolve on first load.
+    // See issue: https://github.com/infinitered/ignite/issues/1738
     setTimeout(fetchQuestions, 1)
   }, [])
 
