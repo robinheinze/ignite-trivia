@@ -1,4 +1,5 @@
-import { ViewStyle } from "react-native"
+import React from "react"
+import { StyleProp, ViewStyle } from "react-native"
 import { KeyboardOffsets, ScreenPresets } from "./screen.presets"
 
 export interface ScreenProps {
@@ -10,7 +11,7 @@ export interface ScreenProps {
   /**
    * An optional style override useful for padding & margin.
    */
-  style?: ViewStyle
+  style?: StyleProp<ViewStyle>
 
   /**
    * One of the different types of presets.
@@ -36,4 +37,10 @@ export interface ScreenProps {
    * By how much should we offset the keyboard? Defaults to none.
    */
   keyboardOffset?: KeyboardOffsets
+
+  /**
+   * Should keyboard persist on screen tap. Defaults to handled.
+   * Only applies to scroll preset.
+   */
+  keyboardShouldPersistTaps?: "handled" | "always" | "never"
 }

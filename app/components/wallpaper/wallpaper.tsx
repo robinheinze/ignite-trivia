@@ -1,5 +1,5 @@
 import React from "react"
-import { Image } from "react-native"
+import { AutoImage as Image } from "../auto-image/auto-image"
 import { presets } from "./wallpaper.presets"
 import { WallpaperProps } from "./wallpaper.props"
 
@@ -16,10 +16,10 @@ export function Wallpaper(props: WallpaperProps) {
 
   // assemble the style
   const presetToUse = presets[preset] || presets.stretch
-  const style = { ...presetToUse, ...styleOverride }
+  const styles = [presetToUse, styleOverride]
 
   // figure out which image to use
   const source = backgroundImage || defaultImage
 
-  return <Image source={source} style={style} />
+  return <Image source={source} style={styles} />
 }

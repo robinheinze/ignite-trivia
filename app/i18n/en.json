@@ -4,6 +4,9 @@
     "cancel": "Cancel",
     "back": "Back"
   },
+  "demoScreen": {
+    "howTo": "How to"
+  },
   "errors": {
     "invalidEmail": "Invalid email address."
   },

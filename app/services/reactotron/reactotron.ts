@@ -1,11 +1,12 @@
-import Tron from "reactotron-react-native"
+import { Tron } from "./tron"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { RootStore } from "../../models/root-store/root-store"
 import { onSnapshot } from "mobx-state-tree"
 import { ReactotronConfig, DEFAULT_REACTOTRON_CONFIG } from "./reactotron-config"
 import { mst } from "reactotron-mst"
 import { clear } from "../../utils/storage"
-import { RootNavigation } from "../../navigators"
+import { AppNavigation } from "../../navigators/navigation-utilities"
+import { Platform } from "react-native"
 
 // Teach TypeScript about the bad things we want to do.
 declare global {
@@ -118,12 +119,14 @@ export class Reactotron {
       })
 
       // hookup middleware
-      if (this.config.useAsyncStorage) {
-        Tron.setAsyncStorageHandler(AsyncStorage)
+      if (Platform.OS !== "web") {
+        if (this.config.useAsyncStorage) {
+          Tron.setAsyncStorageHandler(AsyncStorage)
+        }
+        Tron.useReactNative({
+          asyncStorage: this.config.useAsyncStorage ? undefined : false,
+        })
       }
-      Tron.useReactNative({
-        asyncStorage: this.config.useAsyncStorage ? undefined : false,
-      })
 
       // ignore some chatty `mobx-state-tree` actions
       const RX = /postProcessSnapshot|@APPLY_SNAPSHOT/
@@ -155,7 +158,7 @@ export class Reactotron {
         command: "resetNavigation",
         handler: () => {
           console.tron.log("resetting navigation state")
-          RootNavigation.resetRoot({ routes: [] })
+          AppNavigation.resetRoot({ routes: [] })
         },
       })
 
@@ -165,7 +168,7 @@ export class Reactotron {
         command: "goBack",
         handler: () => {
           console.tron.log("Going back")
-          RootNavigation.goBack()
+          AppNavigation.goBack()
         },
       })
 

@@ -18,9 +18,9 @@ import { initFonts } from "./theme/fonts" // expo
 import * as storage from "./utils/storage"
 import {
   useBackButtonHandler,
-  RootNavigator,
+  AppNavigator,
   canExit,
-  setRootNavigation,
+  setAppNavigation,
   useNavigationPersistence,
 } from "./navigators"
 import { RootStore, RootStoreProvider, setupRootStore } from "./models"
@@ -38,10 +38,10 @@ export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
  * This is the root component of our app.
  */
 function App() {
-  const navigationRef = useRef<NavigationContainerRef>()
+  const navigationRef = useRef<NavigationContainerRef>(null)
   const [rootStore, setRootStore] = useState<RootStore | undefined>(undefined)
 
-  setRootNavigation(navigationRef)
+  setAppNavigation(navigationRef)
   useBackButtonHandler(navigationRef, canExit)
   const { initialNavigationState, onNavigationStateChange } = useNavigationPersistence(
     storage,
@@ -67,7 +67,7 @@ function App() {
     <ToggleStorybook>
       <RootStoreProvider value={rootStore}>
         <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-          <RootNavigator
+          <AppNavigator
             ref={navigationRef}
             initialState={initialNavigationState}
             onStateChange={onNavigationStateChange}
