@@ -11,12 +11,13 @@
     This tutorial will lead you through the steps of creating the data model for a trivia app to illustrate how to use Ignite with real examples.
     <br />
     <br />
-  Check it out in our blog Red Shift : 
+  Check out <a href="https://infinite.red/">Infinite Red</a>'s blog Red Shift for more : 
     <a href="https://shift.infinite.red/creating-a-trivia-app-with-ignite-bowser-part-1-1987cc6e93a1">Part 1</a>
     ·
     <a href="https://shift.infinite.red/creating-a-trivia-app-with-ignite-bowser-part-ii-a286a978d0c8">Part 2</a>
   </p>
 </p>
+<br />
 
 ## About The Project
 
@@ -29,20 +30,46 @@
   You can follow along the tutorial to build this trivia app using the hottest React Native Boilerplate <a href="https://github.com/infinitered/ignite">Ignite</a>
   </p>
 </center>
+<br />
 
 ### Prerequisites
 
 You will need a react-native [development environment](https://reactnative.dev/docs/environment-setup) set up on your computer.
+<br />
 
 ### Installation
 
-- Run the CLI :
+📖 If you want to follow the tutorial then start with running the CLI :
 
    ```sh
    npx ignite-cli new IgniteTrivia
    ```
 
-That simple!
+After that the rest is on the [tutorial](https://shift.infinite.red/creating-a-trivia-app-with-ignite-bowser-part-1-1987cc6e93a1) 😃
+<br />
 
-If you run into problems, first search the issues in this repository. Otherwise you can <a href="https://github.com/robinheinze/ignite-trivia/issues">report the bug</a>.
+📱 If you want to see the finished app :
+
+  1. Clone the repo
+  ```sh
+  git clone git@github.com:robinheinze/ignite-trivia.git
+  ``` 
+  2. Install dependencies
+  ```sh
+  yarn install
+  ```
+  3. Run the app 
+  ```sh
+  npx react-native run-ios
+  ```
+  
+  _or_
+
+  ```sh
+  npx react-native run-android
+  ```
+  
+<br /> 
+  
+#### ⁉️ If you run into problems, first search the issues in this repository. Otherwise you can <a href="https://github.com/robinheinze/ignite-trivia/issues">report the bug</a>.
 
