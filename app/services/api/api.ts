@@ -1,13 +1,21 @@
-import { ApisauceInstance, create, ApiResponse } from "apisauce"
-import { getGeneralApiProblem } from "./api-problem"
-import { ApiConfig, DEFAULT_API_CONFIG } from "./api-config"
-import * as Types from "./api.types"
-import { QuestionSnapshot } from "../../models/question/question"
+/**
+ * This Api class lets you define an API endpoint and methods to request
+ * data and process it.
+ *
+ * See the [Backend API Integration](https://github.com/infinitered/ignite/blob/master/docs/Backend-API-Integration.md)
+ * documentation for more details.
+ */
+import { ApiResponse, ApisauceInstance, create } from "apisauce"
+import Config from "../../config"
+import type { ApiConfig } from "./api.types"
 import * as uuid from "react-native-uuid"
+import { QuestionSnapshotOut } from "../../models"
+import { getGeneralApiProblem } from "./apiProblem"
+import * as Types from "./api.types"
 
 const API_PAGE_SIZE = 50
 
-const convertQuestion = (raw: any): QuestionSnapshot => {
+const convertQuestion = (raw: any): QuestionSnapshotOut => {
   const id = uuid.default.v1().toString()
 
   return {
@@ -23,37 +31,26 @@ const convertQuestion = (raw: any): QuestionSnapshot => {
 }
 
 /**
- * Manages all requests to the API.
+ * Configuring the apisauce instance.
+ */
+export const DEFAULT_API_CONFIG: ApiConfig = {
+  url: Config.API_URL,
+  timeout: 10000,
+}
+
+/**
+ * Manages all requests to the API. You can use this class to build out
+ * various requests that you need to call from your backend API.
  */
 export class Api {
-  /**
-   * The underlying apisauce instance which performs the requests.
-   */
   apisauce: ApisauceInstance
-
-  /**
-   * Configurable options.
-   */
   config: ApiConfig
 
   /**
-   * Creates the api.
-   *
-   * @param config The configuration to use.
+   * Set up our API instance. Keep this lightweight!
    */
   constructor(config: ApiConfig = DEFAULT_API_CONFIG) {
     this.config = config
-  }
-
-  /**
-   * Sets up the API.  This will be called during the bootup
-   * sequence and will happen before the first React component
-   * is mounted.
-   *
-   * Be as quick as possible in here.
-   */
-  setup() {
-    // construct the apisauce instance
     this.apisauce = create({
       baseURL: this.config.url,
       timeout: this.config.timeout,
@@ -81,7 +78,7 @@ export class Api {
     // transform the data into the format we are expecting
     try {
       const rawQuestions = response.data.results
-      const convertedQuestions: QuestionSnapshot[] = rawQuestions.map(convertQuestion)
+      const convertedQuestions: QuestionSnapshotOut[] = rawQuestions.map(convertQuestion)
       return { kind: "ok", questions: convertedQuestions }
     } catch (e) {
       __DEV__ && console.tron.log(e.message)
@@ -89,3 +86,6 @@ export class Api {
     }
   }
 }
+
+// Singleton instance of the API for convenience
+export const api = new Api()
