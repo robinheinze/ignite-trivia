@@ -1,130 +1,79 @@
-# Welcome to your new ignited app!
+# Creating a Trivia App with Ignite
 
-[![CircleCI](https://circleci.com/gh/infinitered/ignite.svg?style=svg)](https://circleci.com/gh/infinitered/ignite)
+<p align="center">
+  <a href="https://shift.infinite.red/creating-a-trivia-app-with-ignite-bowser-part-1-1987cc6e93a1">
+    <img src="https://miro.medium.com/max/1400/1*0595YdQf6XOqEJt35llhLA.png" alt="Logo" width="300" height="200">
+  </a>
 
-## The latest and greatest boilerplate for Infinite Red opinions
+  <h3 align="center">Ignite Trivia App</h3>
 
-This is the boilerplate that [Infinite Red](https://infinite.red) uses as a way to test bleeding-edge changes to our React Native stack.
+  <p align="center">
+    This tutorial will lead you through the steps of creating the data model for a trivia app to illustrate how to use Ignite with real examples.
+    <br />
+    <br />
+  Check out <a href="https://infinite.red/">Infinite Red</a>'s blog Red Shift for more : 
+    <a href="https://shift.infinite.red/creating-a-trivia-app-with-ignite-bowser-part-1-1987cc6e93a1">Part 1</a>
+    ·
+    <a href="https://shift.infinite.red/creating-a-trivia-app-with-ignite-bowser-part-ii-a286a978d0c8">Part 2</a>
+  </p>
+</p>
+<br />
 
-Currently includes:
+## About The Project
 
-- React Native
-- React Navigation
-- MobX State Tree
-- TypeScript
-- And more!
+<center>
+ <p align="center">
+ <img src="https://user-images.githubusercontent.com/53795920/132755045-d3223e1d-5d8b-4a96-9790-c2b91b9ef577.gif" height="500" >
+  
+  <br />
+  <br />
+  You can follow along the tutorial to build this trivia app using the hottest React Native Boilerplate <a href="https://github.com/infinitered/ignite">Ignite</a>
+  </p>
+</center>
+<br />
 
-## Quick Start
+### Prerequisites
 
-The Ignite boilerplate project's structure will look similar to this:
+You will need a react-native [development environment](https://reactnative.dev/docs/environment-setup) set up on your computer.
+<br />
 
-```
-ignite-project
-├── app
-│   ├── components
-│   ├── config
-│   ├── i18n
-│   ├── models
-│   ├── navigators
-│   ├── screens
-│   ├── services
-│   ├── theme
-│   ├── utils
-│   ├── app.tsx
-├── test
-│   ├── __snapshots__
-│   ├── mockFile.ts
-│   ├── setup.ts
-├── README.md
-├── android
-│   ├── app
-│   ├── build.gradle
-│   ├── gradle
-│   ├── gradle.properties
-│   ├── gradlew
-│   ├── gradlew.bat
-│   ├── keystores
-│   └── settings.gradle
-├── ignite
-│   └── templates
-|       |── app-icon
-│       ├── component
-│       ├── model
-│       ├── navigator
-│       └── screen
-├── index.js
-├── ios
-│   ├── IgniteProject
-│   ├── IgniteProject-tvOS
-│   ├── IgniteProject-tvOSTests
-│   ├── IgniteProject.xcodeproj
-│   └── IgniteProjectTests
-├── .env
-└── package.json
+### Installation
 
+📖 If you want to follow the tutorial then start with running the CLI :
+
+```sh
+npx ignite-cli new TriviaApp --install-deps --remove-demo
 ```
 
-### ./app directory
+After that the rest is on the [tutorial](https://shift.infinite.red/creating-a-trivia-app-with-ignite-bowser-part-1-1987cc6e93a1) 😃
+<br />
 
-Included in an Ignite boilerplate project is the `app` directory. This is a directory you would normally have to create when using vanilla React Native.
+📱 If you want to see the finished app :
 
-The inside of the `app` directory looks similar to the following:
+1. Clone the repo
 
-```
-app
-├── components
-├── config
-├── i18n
-├── models
-├── navigators
-├── screens
-├── services
-├── theme
-├── utils
-├── app.tsx
+```sh
+git clone git@github.com:robinheinze/ignite-trivia.git
 ```
 
-**components**
-This is where your reusable components live which help you build your screens.
+2. Install dependencies
 
-**i18n**
-This is where your translations will live if you are using `react-native-i18n`.
+```sh
+yarn
+```
 
-**models**
-This is where your app's models will live. Each model has a directory which will contain the `mobx-state-tree` model file, test file, and any other supporting files like actions, types, etc.
+3. Run the app
 
-**navigators**
-This is where your `react-navigation` navigators will live.
+```sh
+yarn ios
+```
 
-**screens**
-This is where your screen components will live. A screen is a React component which will take up the entire screen and be part of the navigation hierarchy. Each screen will have a directory containing the `.tsx` file, along with any assets or other helper files.
+_or_
 
-**services**
-Any services that interface with the outside world will live here (think REST APIs, Push Notifications, etc.).
+```sh
+yarn android
+```
 
-**theme**
-Here lives the theme for your application, including spacing, colors, and typography.
-
-**utils**
-This is a great place to put miscellaneous helpers and utilities. Things like date helpers, formatters, etc. are often found here. However, it should only be used for things that are truly shared across your application. If a helper or utility is only used by a specific component or model, consider co-locating your helper with that component or model.
-
-**app.tsx** This is the entry point to your app. This is where you will find the main App component which renders the rest of the application.
-
-### ./ignite directory
-
-The `ignite` directory stores all things Ignite, including CLI and boilerplate items. Here you will find templates you can customize to help you get started with React Native.
-
-### ./test directory
-
-This directory will hold your Jest configs and mocks.
-
-## Running Detox end-to-end tests
-
-Read [Detox setup instructions](./detox/README.md).
-
-## Previous Boilerplates
-
-- [2018 aka Bowser](https://github.com/infinitered/ignite-bowser)
-- [2017 aka Andross](https://github.com/infinitered/ignite-andross)
-- [2016 aka Ignite 1.0](https://github.com/infinitered/ignite-ir-boilerplate-2016)
-
+<br /> 
+  
+#### ⁉️ If you run into problems, first search the issues in this repository. Otherwise you can <a href="https://github.com/robinheinze/ignite-trivia/issues">report the bug</a>.
