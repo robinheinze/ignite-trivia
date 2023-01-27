@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite"
 import { Alert, FlatList, TextStyle, View, ViewStyle } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { AppStackScreenProps } from "../navigators"
-import { Button, Screen, Text } from "../components"
+import { Screen, Button, Text } from "../components"
 import { spacing, colors } from "../theme"
 import { Question, useStores } from "../models"
 import { decodeHTMLEntities } from "../utils/decode-html"
@@ -36,6 +36,7 @@ export const QuestionScreen: FC<StackScreenProps<AppStackScreenProps, "Question"
     }
 
     const checkAnswer = (question: Question) => {
+      console.tron.log("checkAnswer")
       if (question.isCorrect) {
         Alert.alert("Correct!")
       } else {
@@ -54,11 +55,14 @@ export const QuestionScreen: FC<StackScreenProps<AppStackScreenProps, "Question"
 
     const renderQuestion = ({ item }) => {
       const question: Question = item
+      if (!question.shuffledAllAnswers) {
+        question.setShuffledAllAnswers()
+      }
       return (
         <View style={$questionWrapper}>
-          <Text preset="heading" style={$question} text={decodeHTMLEntities(question.question)} />
+          <Text style={$question} text={decodeHTMLEntities(question.question)} />
           <RadioButtons
-            options={question.allAnswers}
+            options={question.shuffledAllAnswers}
             onSelection={(guess) => onPressAnswer(question, guess)}
             selectedOption={question.guess}
             renderOption={renderAnswer}
