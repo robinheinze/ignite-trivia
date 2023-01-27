@@ -36,7 +36,6 @@ export const QuestionScreen: FC<StackScreenProps<AppStackScreenProps, "Question"
     }
 
     const checkAnswer = (question: Question) => {
-      console.tron.log("checkAnswer")
       if (question.isCorrect) {
         Alert.alert("Correct!")
       } else {
