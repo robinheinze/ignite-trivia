@@ -20,7 +20,7 @@ export const QuestionModel = types
   .actions(withSetPropAction)
   .views((self) => ({
     get allAnswers() {
-      return shuffle([...self.incorrectAnswers, self.correctAnswer])
+      return shuffle(self.incorrectAnswers.concat([self.correctAnswer]))
     },
     get isCorrect() {
       return self.guess === self.correctAnswer
