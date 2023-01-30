@@ -16,10 +16,12 @@ export const QuestionModel = types
     correctAnswer: types.maybe(types.string),
     incorrectAnswers: types.optional(types.array(types.string), []),
     guess: types.maybe(types.string),
-    allAnswers: types.optional(types.array(types.string), []),
   })
   .actions(withSetPropAction)
   .views((self) => ({
+    get allAnswers() {
+      return shuffle([...self.incorrectAnswers, self.correctAnswer])
+    },
     get isCorrect() {
       return self.guess === self.correctAnswer
     },
@@ -27,9 +29,6 @@ export const QuestionModel = types
   .actions((self) => ({
     setGuess(guess: string) {
       self.setProp("guess", guess)
-    },
-    setAllAnswers() {
-      self.setProp("allAnswers", shuffle([...self.incorrectAnswers, self.correctAnswer]))
     },
   })) // eslint-disable-line @typescript-eslint/no-unused-vars
 

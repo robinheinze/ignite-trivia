@@ -52,11 +52,8 @@ export const QuestionScreen: FC<StackScreenProps<AppStackScreenProps, "Question"
       )
     }
 
-    const renderQuestion = ({ item }) => {
-      const question: Question = item
-      if (question.allAnswers.length === 0) {
-        question.setAllAnswers()
-      }
+    const QuestionComponent = ({ item }) => {
+      const question: Question = item.item
       return (
         <View style={$questionWrapper}>
           <Text style={$question} text={decodeHTMLEntities(question.question)} />
@@ -71,13 +68,15 @@ export const QuestionScreen: FC<StackScreenProps<AppStackScreenProps, "Question"
       )
     }
 
+    const ObservedQuestion = observer(QuestionComponent)
+
     return (
       <Screen style={$root} preset="fixed">
         <Text preset="heading" tx={"questionScreen.header"} style={$header} />
         <FlatList
           style={$questionList}
           data={questions}
-          renderItem={renderQuestion}
+          renderItem={(item) => <ObservedQuestion item={item} />}
           extraData={{ extraDataForMobX: questions.length > 0 ? questions[0].question : "" }}
           keyExtractor={(item) => item.id}
           onRefresh={fetchQuestions}
