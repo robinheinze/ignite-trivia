@@ -16,7 +16,7 @@ export const QuestionModel = types
     correctAnswer: types.maybe(types.string),
     incorrectAnswers: types.optional(types.array(types.string), []),
     guess: types.maybe(types.string),
-    shuffledAllAnswers: types.frozen(types.optional(types.array(types.string), [])),
+    shuffledAllAnswers: types.optional(types.array(types.string), []),
   })
   .actions(withSetPropAction)
   .views((self) => ({
@@ -29,6 +29,7 @@ export const QuestionModel = types
       self.setProp("guess", guess)
     },
     setShuffledAllAnswers() {
+      console.tron.log("setShuffledAllAnswers")
       self.setProp("shuffledAllAnswers", shuffle([...self.incorrectAnswers, self.correctAnswer]))
     },
   })) // eslint-disable-line @typescript-eslint/no-unused-vars

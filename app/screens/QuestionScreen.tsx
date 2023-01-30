@@ -54,7 +54,7 @@ export const QuestionScreen: FC<StackScreenProps<AppStackScreenProps, "Question"
 
     const renderQuestion = ({ item }) => {
       const question: Question = item
-      if (!question.shuffledAllAnswers) {
+      if (question.shuffledAllAnswers.length === 0) {
         question.setShuffledAllAnswers()
       }
       return (
