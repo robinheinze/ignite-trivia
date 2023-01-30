@@ -54,14 +54,14 @@ export const QuestionScreen: FC<StackScreenProps<AppStackScreenProps, "Question"
 
     const renderQuestion = ({ item }) => {
       const question: Question = item
-      if (question.shuffledAllAnswers.length === 0) {
-        question.setShuffledAllAnswers()
+      if (question.allAnswersShuffled.length === 0) {
+        question.setAllAnswersShuffled()
       }
       return (
         <View style={$questionWrapper}>
           <Text style={$question} text={decodeHTMLEntities(question.question)} />
           <RadioButtons
-            options={question.shuffledAllAnswers}
+            options={question.allAnswersShuffled}
             onSelection={(guess) => onPressAnswer(question, guess)}
             selectedOption={question.guess}
             renderOption={renderAnswer}
