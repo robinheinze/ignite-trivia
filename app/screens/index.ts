@@ -1,2 +1,3 @@
+export * from "./ErrorScreen/ErrorBoundary"
 // export other screens here
-export * from "./question/question-screen"
+export * from "./QuestionScreen"

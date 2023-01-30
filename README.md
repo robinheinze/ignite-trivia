@@ -41,35 +41,39 @@ You will need a react-native [development environment](https://reactnative.dev/d
 
 📖 If you want to follow the tutorial then start with running the CLI :
 
-   ```sh
-   npx ignite-cli new IgniteTrivia
-   ```
+```sh
+npx ignite-cli new TriviaApp --install-deps --remove-demo
+```
 
 After that the rest is on the [tutorial](https://shift.infinite.red/creating-a-trivia-app-with-ignite-bowser-part-1-1987cc6e93a1) 😃
 <br />
 
 📱 If you want to see the finished app :
 
-  1. Clone the repo
-  ```sh
-  git clone git@github.com:robinheinze/ignite-trivia.git
-  ``` 
-  2. Install dependencies
-  ```sh
-  yarn install
-  ```
-  3. Run the app 
-  ```sh
-  npx react-native run-ios
-  ```
-  
-  _or_
+1. Clone the repo
 
-  ```sh
-  npx react-native run-android
-  ```
-  
+```sh
+git clone git@github.com:robinheinze/ignite-trivia.git
+```
+
+2. Install dependencies
+
+```sh
+yarn
+```
+
+3. Run the app
+
+```sh
+yarn ios
+```
+
+_or_
+
+```sh
+yarn android
+```
+
 <br /> 
   
 #### ⁉️ If you run into problems, first search the issues in this repository. Otherwise you can <a href="https://github.com/robinheinze/ignite-trivia/issues">report the bug</a>.
-
