@@ -73,7 +73,7 @@ export const QuestionScreen: FC<StackScreenProps<AppStackScreenProps, "Question"
 
     return (
       <Screen style={$root} preset="fixed">
-        <Text preset="heading" text="Question" style={$header} />
+        <Text preset="heading" tx={"questionScreen.header"} style={$header} />
         <FlatList
           style={$questionList}
           data={questions}
